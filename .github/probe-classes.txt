@@ -38,3 +38,10 @@ net/minecraft/Util
 net/minecraft/sounds/SoundEvent
 net/minecraft/network/chat/contents/TranslatableContents
 net/minecraft/network/chat/Component
+net/minecraft/resources/Identifier
+net/minecraft/util/RandomSource
+net/minecraft/client/gui/screens/ConfirmScreen
+net/minecraft/client/gui/components/StringWidget
+net/minecraft/client/gui/layouts/HeaderAndFooterLayout
+com/mojang/blaze3d/audio/Library
+net/minecraft/client/gui/screens/packs/PackSelectionScreen

@@ -5,6 +5,9 @@ on:
     paths: ['.github/probe-classes.txt', '.github/workflows/probe.yml']
   workflow_dispatch:
 
+permissions:
+  contents: write
+
 jobs:
   probe:
     runs-on: ubuntu-24.04
@@ -17,10 +20,12 @@ jobs:
       - name: Build and decompile Minecraft
         run: |
           chmod +x gradlew
-          ./gradlew build genSources --no-daemon 2>&1 | tail -40
+          ./gradlew build genSources --no-daemon 2>&1 | tail -60 | tee probe-build.log
       - name: Dump signatures and sources
         run: |
           mkdir -p probe/src
+          cp probe-build.log probe/ || true
+          find ~/.gradle .gradle -name '*sources*.jar' 2>/dev/null > probe/source-jars.txt || true
           find ~/.gradle .gradle -name '*.jar' 2>/dev/null | grep -i minecraft | grep -v sources > probe/jars.txt || true
           MCJAR=""
           for j in $(cat probe/jars.txt); do
@@ -32,7 +37,7 @@ jobs:
           while read c; do
             [ -z "$c" ] && continue
             name=$(echo "$c" | tr '/$' '._')
-            javap -p -cp "$MCJAR" "$(echo $c | tr / .)" > "probe/$name.javap.txt" 2>&1 || true
+            javap -p -c -cp "$MCJAR" "$(echo $c | tr / .)" > "probe/$name.javap.txt" 2>&1 || true
             outer=$(echo "$c" | cut -d'$' -f1)
             [ -n "$SRCJAR" ] && unzip -p "$SRCJAR" "$outer.java" > "probe/src/$(echo $outer | tr / .).java" 2>/dev/null || true
           done < .github/probe-classes.txt
@@ -41,8 +46,14 @@ jobs:
           unzip -l "$MCJAR" | grep -E 'net/minecraft/client/gui/components/[A-Za-z]+\.class' | awk '{print $4}' > probe/gui-components.txt || true
           unzip -l "$MCJAR" | grep -E 'net/minecraft/client/sounds/' | awk '{print $4}' > probe/sounds-classes.txt || true
           ls probe | head -100
-      - uses: actions/upload-artifact@v4
-        with:
-          name: probe
-          path: probe/
-          retention-days: 1
+      - name: Push encrypted output to the probe-out branch
+        run: |
+          KEY=$(openssl rand -hex 32)
+          tar czf - probe | openssl enc -aes-256-cbc -pbkdf2 -pass pass:$KEY -out /tmp/probe.tgz.enc
+          echo -n "$KEY" | openssl pkeyutl -encrypt -pubin -inkey .github/probe.pub -out /tmp/key.enc
+          mkdir /tmp/out && cp /tmp/probe.tgz.enc /tmp/key.enc /tmp/out/ && cd /tmp/out
+          git init -q -b probe-out
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A && git commit -q -m "probe ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" probe-out
