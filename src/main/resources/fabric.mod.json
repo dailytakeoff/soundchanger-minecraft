@@ -3,13 +3,21 @@
 	"id": "soundchanger",
 	"version": "${version}",
 	"name": "Sound Changer",
-	"description": "Make your own sound packs in game or by dropping files in a folder.",
+	"description": "Make your own sound packs: replace any Minecraft sound, add your own next to it, or mute it. Use the in-game editor (J) or drop files into .minecraft/soundpacks. Plays OGG, WAV, AIFF, MP3 and FLAC directly, everything else through ffmpeg.",
 	"authors": ["dailytakeoff"],
 	"license": "MIT",
+	"contact": {
+		"sources": "https://github.com/dailytakeoff/soundchanger-minecraft"
+	},
+	"icon": "assets/soundchanger/icon.png",
 	"environment": "client",
 	"entrypoints": {
-		"client": ["io.github.dailytakeoff.soundchanger.SoundChangerClient"]
+		"client": ["io.github.dailytakeoff.soundchanger.SoundChangerClient"],
+		"modmenu": ["io.github.dailytakeoff.soundchanger.ModMenuIntegration"]
 	},
+	"mixins": [
+		{ "config": "soundchanger.mixins.json", "environment": "client" }
+	],
 	"depends": {
 		"fabricloader": ">=0.19.5",
 		"minecraft": "~26.3",

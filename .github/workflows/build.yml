@@ -1,0 +1,77 @@
+# Builds the mod on every push, then starts the game in a virtual screen, runs the in-game checks
+# (every audio format, replace/add/mute) and photographs the menus.
+# Jar, logs and screenshots go to the ci-out branch.
+name: build
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: '25'
+      - name: Build mod
+        run: |
+          set -o pipefail
+          chmod +x gradlew
+          ./gradlew build --no-daemon 2>&1 | tee build.log
+      - name: Report compile errors as annotations
+        if: failure()
+        run: |
+          grep -E -A3 '(error:|e: |FAILURE|What went wrong)' build.log | head -400 > errors.txt || true
+          msg=$(sed -e 's/%/%25/g' errors.txt | awk '{printf "%s%%0A", $0}')
+          echo "::error title=Build errors::${msg:0:60000}"
+      - name: Install software OpenGL, a virtual screen and ffmpeg
+        timeout-minutes: 8
+        run: |
+          sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 update -q
+          sudo apt-get -o Acquire::Retries=3 -o Acquire::http::Timeout=30 install -y -q --no-install-recommends \
+            xvfb xauth mesa-utils libgl1 libglx-mesa0 libgl1-mesa-dri libegl1 libegl-mesa0 libvulkan1 mesa-vulkan-drivers ffmpeg
+      - name: In-game checks and screenshots
+        id: shots
+        continue-on-error: true
+        timeout-minutes: 22
+        env:
+          LIBGL_ALWAYS_SOFTWARE: "1"
+          GALLIUM_DRIVER: llvmpipe
+          SDL_VIDEO_DRIVER: x11
+        run: |
+          set -o pipefail
+          XARGS="-screen 0 1280x720x24 +extension GLX +render -noreset"
+          timeout 20m xvfb-run -a -s "$XARGS" ./gradlew runClientGameTest --no-daemon 2>&1 | tee gametest.log
+      - name: Report check results as annotations
+        if: always()
+        run: |
+          grep -E 'CHECK (FAIL|SUMMARY)' gametest.log 2>/dev/null | head -100 > fails.txt || true
+          grep -E -B2 -A8 '(Exception|Caused by|Mixin apply|InvalidInjection)' gametest.log 2>/dev/null | head -150 >> fails.txt || true
+          msg=$(sed -e 's/%/%25/g' fails.txt | awk '{printf "%s%%0A", $0}')
+          [ -s fails.txt ] && echo "::warning title=Game checks::${msg:0:60000}" || true
+      - name: Save jar, logs and screenshots to the ci-out branch
+        if: always() && github.event_name != 'pull_request'
+        run: |
+          mkdir -p /tmp/out/screenshots
+          cp build/libs/*.jar /tmp/out/ 2>/dev/null || true
+          find . -name '*.png' -path '*screenshots*' -print -exec cp {} /tmp/out/screenshots/ \; || true
+          cp build.log gametest.log /tmp/out/ 2>/dev/null || true
+          grep -E 'CHECK|Sound Changer|soundchanger' gametest.log > /tmp/out/checks.log 2>/dev/null || true
+          cd /tmp/out
+          git init -q -b ci-out
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Build of ${GITHUB_SHA::7}"
+          git push -f "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}" ci-out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: SoundChanger
+          path: build/libs/*.jar

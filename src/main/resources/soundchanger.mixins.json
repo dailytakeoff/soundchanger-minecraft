@@ -1,0 +1,12 @@
+{
+	"required": true,
+	"package": "io.github.dailytakeoff.soundchanger.mixin",
+	"compatibilityLevel": "JAVA_25",
+	"client": [
+		"SoundBufferLibraryMixin",
+		"SoundManagerMixin"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
