@@ -1,0 +1,19 @@
+{
+	"schemaVersion": 1,
+	"id": "soundchanger",
+	"version": "${version}",
+	"name": "Sound Changer",
+	"description": "Make your own sound packs in game or by dropping files in a folder.",
+	"authors": ["dailytakeoff"],
+	"license": "MIT",
+	"environment": "client",
+	"entrypoints": {
+		"client": ["io.github.dailytakeoff.soundchanger.SoundChangerClient"]
+	},
+	"depends": {
+		"fabricloader": ">=0.19.5",
+		"minecraft": "~26.3",
+		"java": ">=25",
+		"fabric-api": "*"
+	}
+}
