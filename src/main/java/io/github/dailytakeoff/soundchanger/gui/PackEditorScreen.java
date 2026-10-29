@@ -402,7 +402,7 @@ public final class PackEditorScreen extends Screen {
 		if (selected == null) {
 			int y = 26;
 			for (String line : ListView.wrap(this.font, "Pick a sound on the left. Try searching for creeper, step, door, music or chest.\n\n"
-					+ "● replaced   + added next to Minecraft's   ∅ muted\n\n"
+					+ "● replaced\n+ added next to Minecraft's\n∅ muted\n\n"
 					+ "Double-click a sound to hear it.", rw - 8)) {
 				g.text(this.font, line, rx + 2, y, Ui.GRAY, false);
 				y += 11;
