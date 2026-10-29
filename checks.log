@@ -1,0 +1,50 @@
+	- soundchanger 0.1
+	- soundchanger-test 1.0.0
+[11:17:26] [Render thread/INFO] (Sound Changer) Loaded 0 sound pack(s): 0 sound(s) changed, 0 file(s)
+[11:17:29] [Render thread/INFO] (Minecraft) Reloading ResourceManager: vanilla, vanilla, fabric-advancement-api-v1, fabric-api, fabric-api-base, fabric-api-lookup-api-v1, fabric-biome-api-v1, fabric-block-api-v1, fabric-block-getter-api-v2, fabric-client-gametest-api-v1, fabric-command-api-v2, fabric-content-registries-v0, fabric-convention-tags-v2, fabric-crash-report-info-v1, fabric-creative-tab-api-v1, fabric-data-attachment-api-v1, fabric-data-generation-api-v1, fabric-debug-api-v1, fabric-dimensions-v1, fabric-entity-events-v1, fabric-events-interaction-v0, fabric-game-rule-api-v1, fabric-gametest-api-v1, fabric-item-api-v1, fabric-key-mapping-api-v1, fabric-lifecycle-events-v1, fabric-loot-api-v3, fabric-menu-api-v1, fabric-message-api-v1, fabric-model-loading-api-v1, fabric-networking-api-v1, fabric-object-builder-api-v1, fabric-particles-v1, fabric-permission-api-v1, fabric-recipe-api-v1, fabric-registry-sync-v0, fabric-renderer-api-v1, fabric-renderer-indigo, fabric-rendering-fluids-v1, fabric-rendering-v1, fabric-resource-conditions-api-v1, fabric-resource-loader-v0, fabric-resource-loader-v1, fabric-screen-api-v1, fabric-serialization-api-v1, fabric-sound-api-v1, fabric-tag-api-v1, fabric-transfer-api-v1, fabric-transitive-access-wideners-v1, fabricloader, soundchanger
+[11:17:32] [Render thread/INFO] (Sound Changer) Loaded 0 sound pack(s): 0 sound(s) changed, 0 file(s)
+[11:17:36] [Render thread/WARN] (Sound Changer) Pack CI Test: replace/Not A Sound!.wav: not a valid sound name
+[11:17:36] [Render thread/INFO] (Sound Changer) Loaded 1 sound pack(s): 5 sound(s) changed, 7 file(s)
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.aiff          AIFF             orig: 1.000 s, 44100 Hz, 2 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.aiff          AIFF             mono: 1.000 s, 44100 Hz, 1 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.flac          FLAC             orig: 1.000 s, 44100 Hz, 2 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.flac          FLAC             mono: 1.000 s, 44100 Hz, 1 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) ffmpeg: /usr/bin/ffmpeg
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.m4a           other            orig: 1.022 s, 48000 Hz, 2 ch, peak 12309
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.m4a           other            mono: 1.022 s, 48000 Hz, 1 ch, peak 12309
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.mp3           MP3              orig: 1.071 s, 44100 Hz, 2 ch, peak 11378
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.mp3           MP3              mono: 1.071 s, 44100 Hz, 1 ch, peak 11378
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.ogg           OGG              orig: 1.000 s, 44100 Hz, 2 ch, peak 12231
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.ogg           OGG              mono: 1.000 s, 44100 Hz, 1 ch, peak 12231
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.opus          OGG (Opus/other) orig: 1.000 s, 48000 Hz, 2 ch, peak 12147
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.opus          OGG (Opus/other) mono: 1.000 s, 48000 Hz, 1 ch, peak 12147
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.wav           WAV              orig: 1.000 s, 44100 Hz, 2 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone.wav           WAV              mono: 1.000 s, 44100 Hz, 1 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone24.flac        FLAC             orig: 1.000 s, 44100 Hz, 2 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone24.flac        FLAC             mono: 1.000 s, 44100 Hz, 1 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone24.wav         WAV              orig: 1.000 s, 44100 Hz, 2 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone24.wav         WAV              mono: 1.000 s, 44100 Hz, 1 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone8mono.wav      WAV              orig: 1.000 s, 44100 Hz, 1 ch, peak 12032
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone8mono.wav      WAV              mono: 1.000 s, 44100 Hz, 1 ch, peak 12032
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone_mono22k.mp3   MP3              orig: 1.097 s, 22050 Hz, 1 ch, peak 11418
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tone_mono22k.mp3   MP3              mono: 1.097 s, 22050 Hz, 1 ch, peak 11418
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tonef32.wav        WAV              orig: 1.000 s, 44100 Hz, 2 ch, peak 11999
+[11:17:37] [Test thread/INFO] (Sound Changer) CHECK OK   decode tonef32.wav        WAV              mono: 1.000 s, 44100 Hz, 1 ch, peak 11999
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   pack found
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   problem reported for bad name — [replace/Not A Sound!.wav: not a valid sound name]
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   game has sounds — only 1991
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   harp replaced by our file — Sound[soundchanger:custom/1]
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   harp is mono (placed in world)
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   chicken keeps vanilla + 2 — 3 -> 5
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   chicken picks ours sometimes and vanilla sometimes — 180/400 were ours
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   chicken subtitle kept — translation{key='subtitles.entity.chicken.ambient', args=[]}
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   cow muted
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   creeper has 3 of ours — weight 3
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   menu music streams and stays stereo — Sound[soundchanger:custom/7]
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   pack off -> vanilla harp — Sound[minecraft:note/harp2]
+[11:17:37] [Render thread/INFO] (Sound Changer) CHECK OK   buffer soundchanger:sounds/custom/9.ogg (98082 bytes, PCM_SIGNED 48000.0 Hz, 16 bit, mono, 2 bytes/frame, little-endian)
+[11:17:38] [Render thread/INFO] (Sound Changer) CHECK OK   buffer soundchanger:sounds/custom/10.ogg (96000 bytes, PCM_SIGNED 48000.0 Hz, 16 bit, mono, 2 bytes/frame, little-endian)
+[11:17:38] [Render thread/INFO] (Sound Changer) CHECK OK   buffer soundchanger:sounds/custom/8.ogg (88200 bytes, PCM_SIGNED 44100.0 Hz, 16 bit, mono, 2 bytes/frame, little-endian)
+[11:17:38] [Render thread/INFO] (Sound Changer) CHECK OK   creeper variants loaded — 3 seen
+[11:17:38] [Render thread/INFO] (Sound Changer) CHECK OK   looping stream keeps going (576000 bytes)
+[11:17:44] [Test thread/INFO] (Sound Changer) CHECK SUMMARY: all passed
