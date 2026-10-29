@@ -4,7 +4,6 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Tooltip;
 import net.minecraft.network.chat.Component;
-import net.minecraft.util.Util;
 
 import java.nio.file.Path;
 
@@ -56,7 +55,15 @@ final class Ui {
 			java.nio.file.Files.createDirectories(dir);
 		} catch (java.io.IOException ignored) {
 		}
-		Util.getPlatform().openPath(dir);
+		String os = System.getProperty("os.name", "").toLowerCase(java.util.Locale.ROOT);
+		String[] cmd = os.contains("win") ? new String[] {"explorer.exe", dir.toAbsolutePath().toString()}
+				: os.contains("mac") ? new String[] {"open", dir.toAbsolutePath().toString()}
+				: new String[] {"xdg-open", dir.toAbsolutePath().toString()};
+		try {
+			new ProcessBuilder(cmd).redirectErrorStream(true).redirectOutput(ProcessBuilder.Redirect.DISCARD).start();
+		} catch (java.io.IOException e) {
+			io.github.dailytakeoff.soundchanger.SoundChanger.LOGGER.warn("Could not open {}: {}", dir, e.toString());
+		}
 	}
 
 	static String size(long bytes) {

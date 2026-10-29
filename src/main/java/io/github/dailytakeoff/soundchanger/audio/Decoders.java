@@ -141,7 +141,8 @@ public final class Decoders {
 					case FLAC -> new FlacSource(path);
 					default -> throw new IllegalStateException();
 				};
-			} catch (IOException | RuntimeException e) {
+			} catch (IOException | RuntimeException | LinkageError e) {
+				// LinkageError: a decoder library failing to start (e.g. a missing resource) shouldn't stop the ffmpeg fallback
 				nativeError = e instanceof IOException io ? io : new IOException(e.toString(), e);
 			}
 		}

@@ -94,7 +94,7 @@ public final class CustomAudio {
 						String.format(java.util.Locale.ROOT, "%.1f", d.seconds()), d.sampleRate(), d.channels(),
 						(System.nanoTime() - start) / 1_000_000);
 				return new SoundBuffer(d.toBuffer(), Pcm.format(d.sampleRate(), d.channels()));
-			} catch (IOException | RuntimeException e) {
+			} catch (IOException | RuntimeException | LinkageError e) {
 				fail(k.file(), e);
 				throw new CompletionException(e);
 			}
@@ -111,7 +111,7 @@ public final class CustomAudio {
 				AudioStream s = new PcmAudioStream(() -> Decoders.open(ref.file(), ref.mono()), looping, ref.mono());
 				ERRORS.remove(ref.file().toAbsolutePath().normalize());
 				return s;
-			} catch (IOException | RuntimeException e) {
+			} catch (IOException | RuntimeException | LinkageError e) {
 				fail(ref.file(), e);
 				throw new CompletionException(e);
 			}
